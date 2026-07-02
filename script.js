@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
-  initScrollAnimations();
-  initProgressBars();
   renderCreditTable();
   renderProgramStats();
   renderActivityDetails();
   renderSkills();
   renderGoals();
   renderValues();
+  initScrollAnimations();
+  initProgressBars();
   initRadarChart();
 });
 
@@ -232,13 +232,6 @@ function renderActivityDetails() {
     </div>
   `).join('');
 
-  document.querySelectorAll('#activity-details .fade-in-up').forEach(el => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-      { threshold: 0.1 }
-    );
-    observer.observe(el);
-  });
 }
 
 /* ── Skills ── */
@@ -284,25 +277,29 @@ function renderSkills() {
 
   document.getElementById('skills-grid').innerHTML = skills.map(s => `
     <div class="skill-card fade-in-up">
-      <div class="flex items-start justify-between">
-        <div class="flex items-center gap-3">
-          <span class="text-2xl">${s.icon}</span>
-          <div>
-            <h3 class="font-semibold text-slate-800">${s.name}</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Lv.${s.level}</p>
-          </div>
-        </div>
-        <div class="skill-level">
+      <div class="flex items-start justify-between gap-4 mb-4">
+        <h3 class="font-semibold text-slate-800 text-lg">${s.icon} ${s.name} <span class="text-primary-600">| Lv.${s.level}</span></h3>
+        <div class="skill-level shrink-0">
           ${Array.from({ length: 10 }, (_, i) =>
             `<span class="skill-dot ${i < s.level ? 'filled' : ''}"></span>`
           ).join('')}
         </div>
       </div>
-      <p class="text-xs text-primary-600 font-medium mt-3">${s.fields}</p>
-      ${s.desc ? `<p class="text-sm text-slate-600 mt-2 leading-relaxed">${s.desc}</p>` : ''}
-      <ul class="mt-3 space-y-1">
-        ${s.experiences.map(e => `<li class="text-xs text-slate-500 pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-primary-400">${e}</li>`).join('')}
-      </ul>
+      <div class="skill-section">
+        <p class="skill-label">활용 분야</p>
+        <p class="text-sm text-primary-600 font-medium">${s.fields}</p>
+      </div>
+      ${s.desc ? `
+      <div class="skill-section">
+        <p class="skill-label">소개</p>
+        <p class="text-sm text-slate-600 leading-relaxed">${s.desc}</p>
+      </div>` : ''}
+      <div class="skill-section">
+        <p class="skill-label">활용 경험</p>
+        <ul class="skill-list">
+          ${s.experiences.map(e => `<li>${e}</li>`).join('')}
+        </ul>
+      </div>
     </div>
   `).join('');
 }
