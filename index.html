@@ -11,438 +11,431 @@
       theme: {
         extend: {
           colors: {
-            skku: {
-              blue: '#00458C',
-              navy: '#002855',
-              gold: '#C5A572',
-              light: '#E8F0FA',
-            }
+            primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+            accent: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' },
           },
           fontFamily: {
             sans: ['Pretendard', 'Noto Sans KR', 'system-ui', 'sans-serif'],
-            display: ['Outfit', 'Pretendard', 'sans-serif'],
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    };
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
-
-  <!-- Loading Screen -->
-  <div id="loader" class="fixed inset-0 z-[100] flex items-center justify-center bg-skku-navy">
-    <div class="text-center">
-      <div class="loader-ring mx-auto mb-4"></div>
-      <p class="text-skku-gold font-display text-lg tracking-widest">PORTFOLIO</p>
-    </div>
-  </div>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
   <!-- Navigation -->
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="flex items-center justify-between h-16 mt-2 rounded-2xl nav-glass px-5">
-        <a href="#hero" class="font-display font-bold text-lg text-white tracking-tight">
-          KJ<span class="text-skku-gold">.</span>
-        </a>
-
-        <!-- Desktop Menu -->
-        <ul class="hidden lg:flex items-center gap-1">
-          <li><a href="#education" class="nav-link">학력</a></li>
-          <li><a href="#experiences" class="nav-link">경험</a></li>
+      <div class="flex items-center justify-between h-16">
+        <a href="#hero" class="text-lg font-bold text-white nav-logo">KJ</a>
+        <button id="menu-toggle" class="md:hidden text-white p-2 rounded-lg hover:bg-white/10" aria-label="메뉴 열기">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <ul id="nav-links" class="hidden md:flex items-center gap-1">
           <li><a href="#academic" class="nav-link">교과활동</a></li>
           <li><a href="#extracurricular" class="nav-link">비교과활동</a></li>
           <li><a href="#skills" class="nav-link">기술</a></li>
-          <li><a href="#plans" class="nav-link">목표</a></li>
+          <li><a href="#goals" class="nav-link">목표와계획</a></li>
           <li><a href="#values" class="nav-link">가치관</a></li>
         </ul>
-
-        <!-- Mobile Menu Button -->
-        <button id="menu-toggle" class="lg:hidden text-white p-2" aria-label="메뉴 열기">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
       </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="lg:hidden hidden mx-4 mt-1 rounded-2xl nav-glass overflow-hidden">
-      <ul class="py-3 px-2">
-        <li><a href="#education" class="mobile-nav-link">학력</a></li>
-        <li><a href="#experiences" class="mobile-nav-link">경험</a></li>
+      <ul id="mobile-menu" class="hidden md:hidden pb-4 space-y-1">
         <li><a href="#academic" class="mobile-nav-link">교과활동</a></li>
         <li><a href="#extracurricular" class="mobile-nav-link">비교과활동</a></li>
         <li><a href="#skills" class="mobile-nav-link">기술</a></li>
-        <li><a href="#plans" class="mobile-nav-link">목표와 계획</a></li>
+        <li><a href="#goals" class="mobile-nav-link">목표와계획</a></li>
         <li><a href="#values" class="mobile-nav-link">가치관</a></li>
       </ul>
     </div>
   </nav>
 
   <!-- Hero / Profile -->
-  <section id="hero" class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-skku-navy via-skku-blue to-[#0066B3]">
-    <div class="hero-pattern absolute inset-0 opacity-10"></div>
-    <div class="hero-glow absolute top-1/4 -right-32 w-96 h-96 rounded-full bg-skku-gold/20 blur-3xl"></div>
-    <div class="hero-glow absolute bottom-1/4 -left-32 w-80 h-80 rounded-full bg-white/10 blur-3xl"></div>
+  <section id="hero" class="hero-gradient min-h-screen flex items-center relative overflow-hidden">
+    <div class="absolute inset-0 hero-pattern opacity-30"></div>
+    <div class="absolute top-20 right-10 w-72 h-72 bg-primary-400/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 left-10 w-96 h-96 bg-accent-400/10 rounded-full blur-3xl"></div>
 
-    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-32 w-full">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-32 relative z-10">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div class="reveal">
-          <p class="text-skku-gold font-medium tracking-widest text-sm mb-4 uppercase">Portfolio 2026</p>
-          <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
+        <div class="fade-in">
+          <p class="text-primary-200 text-sm font-medium tracking-widest uppercase mb-4">Portfolio</p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
             장경진
+            <span class="block text-2xl sm:text-3xl font-normal text-primary-200 mt-2">Kyeongjin Jang</span>
           </h1>
-          <p class="text-xl text-blue-100 font-display mb-6">Kyeongjin Jang</p>
-          <p class="text-blue-200/90 text-lg leading-relaxed mb-8 max-w-lg">
-            성균관대학교 공과대학 · 신소재·반도체 분야를 꿈꾸는 성장형 엔지니어
+          <p class="text-lg text-slate-300 mb-8 max-w-lg leading-relaxed">
+            성균관대학교 공과대학 · 꾸준한 성장과 함께하는 학습자
           </p>
-
-          <div class="flex flex-wrap gap-4 mb-10">
-            <div class="flex items-center gap-2 text-blue-100 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm">
-              <span>📍</span> Suwon, South Korea
-            </div>
-            <a href="mailto:jjkj300@g.skku.edu" class="flex items-center gap-2 text-blue-100 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm hover:bg-white/20 transition-colors">
-              <span>📧</span> jjkj300@g.skku.edu
+          <div class="flex flex-wrap gap-4 mb-8">
+            <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              Suwon, South Korea
+            </span>
+            <a href="mailto:jjkj300@g.skku.edu" class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm hover:bg-white/20 transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              jjkj300@g.skku.edu
             </a>
           </div>
-
           <div class="flex flex-wrap gap-3">
-            <a href="#academic" class="btn-primary">교과활동 보기</a>
+            <a href="#academic" class="btn-primary">포트폴리오 보기</a>
             <a href="#experiences" class="btn-outline">활동 경험</a>
           </div>
         </div>
 
-        <div class="reveal delay-200 hidden lg:block">
-          <div class="relative">
-            <div class="profile-card rounded-3xl p-8 backdrop-blur-xl">
-              <div class="flex items-center gap-4 mb-6">
-                <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-skku-gold to-amber-600 flex items-center justify-center text-3xl font-display font-bold text-white shadow-lg">
-                  KJ
-                </div>
-                <div>
-                  <h3 class="text-white font-semibold text-lg">장경진</h3>
-                  <p class="text-blue-200 text-sm">성균관대학교 공과대학</p>
-                  <p class="text-skku-gold text-xs mt-1">2025.09 ~ 2029.07</p>
-                </div>
+        <div class="fade-in delay-200">
+          <div class="glass-card p-8 rounded-2xl">
+            <h2 class="text-white text-lg font-semibold mb-6 flex items-center gap-2">
+              <span class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center text-sm">🎓</span>
+              Education
+            </h2>
+            <div class="space-y-4">
+              <div class="border-l-2 border-primary-400 pl-4">
+                <h3 class="text-white font-semibold">성균관대학교</h3>
+                <p class="text-primary-200 text-sm">공과대학</p>
+                <p class="text-slate-400 text-sm mt-1">2025.09 ~ 2029.07</p>
               </div>
-              <div class="grid grid-cols-2 gap-4">
-                <div class="stat-box">
-                  <p class="text-2xl font-display font-bold text-white">4.0</p>
-                  <p class="text-blue-200 text-xs mt-1">목표 GPA</p>
-                </div>
-                <div class="stat-box">
-                  <p class="text-2xl font-display font-bold text-white">6+</p>
-                  <p class="text-blue-200 text-xs mt-1">봉사 활동</p>
-                </div>
-                <div class="stat-box">
-                  <p class="text-2xl font-display font-bold text-white">Lv.9</p>
-                  <p class="text-blue-200 text-xs mt-1">ChatGPT</p>
-                </div>
-                <div class="stat-box">
-                  <p class="text-2xl font-display font-bold text-white">100%</p>
-                  <p class="text-blue-200 text-xs mt-1">창의장학금</p>
-                </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-white/10">
+              <h3 class="text-white text-sm font-semibold mb-3">🏆 Scholarship & Awards</h3>
+              <div class="bg-accent-500/20 border border-accent-400/30 rounded-lg px-4 py-3">
+                <p class="text-accent-300 text-sm font-medium">2026.06 학생성공 창의장학금 전액</p>
+              </div>
+            </div>
+            <div class="mt-6 grid grid-cols-2 gap-4">
+              <div class="stat-box">
+                <p class="text-2xl font-bold text-white">4.17</p>
+                <p class="text-xs text-slate-400">GPA / 4.5</p>
+              </div>
+              <div class="stat-box">
+                <p class="text-2xl font-bold text-white">19</p>
+                <p class="text-xs text-slate-400">이수 학점</p>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <a href="#education" class="text-white/50 hover:text-white transition-colors" aria-label="아래로 스크롤">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-          </svg>
-        </a>
-      </div>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <a href="#experiences" class="text-white/50 hover:text-white transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+      </a>
     </div>
   </section>
 
-  <!-- Quick Menu -->
-  <section class="py-8 bg-white border-b border-slate-100 sticky top-20 z-40 shadow-sm">
+  <!-- Experiences Timeline -->
+  <section id="experiences" class="py-20 bg-white">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="flex flex-wrap justify-center gap-2 sm:gap-3">
-        <a href="#academic" class="quick-chip">교과활동</a>
-        <a href="#extracurricular" class="quick-chip">비교과활동</a>
-        <a href="#skills" class="quick-chip">기술</a>
-        <a href="#plans" class="quick-chip">목표와계획</a>
-        <a href="#values" class="quick-chip">가치관</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education & Awards -->
-  <section id="education" class="section-padding bg-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="section-header reveal">
-        <span class="section-tag">Education</span>
-        <h2 class="section-title">학력 &amp; 수상</h2>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-8 mt-12">
-        <div class="reveal card-hover bg-gradient-to-br from-skku-light to-white border border-blue-100 rounded-2xl p-8">
-          <div class="flex items-start gap-4">
-            <div class="w-14 h-14 rounded-xl bg-skku-blue flex items-center justify-center shrink-0">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"/>
-              </svg>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-skku-navy mb-1">성균관대학교</h3>
-              <p class="text-skku-blue font-medium mb-2">공과대학</p>
-              <p class="text-slate-500 text-sm">2025.09 ~ 2029.07</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="reveal delay-100 card-hover bg-gradient-to-br from-amber-50 to-white border border-amber-100 rounded-2xl p-8">
-          <div class="flex items-start gap-4">
-            <div class="w-14 h-14 rounded-xl bg-skku-gold flex items-center justify-center shrink-0">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
-              </svg>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-skku-navy mb-1">Scholarship &amp; Awards</h3>
-              <ul class="space-y-2 mt-3">
-                <li class="flex items-center gap-2 text-slate-600">
-                  <span class="w-2 h-2 rounded-full bg-skku-gold shrink-0"></span>
-                  2026.06 학생성공 창의장학금 <strong class="text-skku-blue">전액</strong>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Experiences -->
-  <section id="experiences" class="section-padding bg-slate-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="section-header reveal">
+      <div class="section-header fade-in-up">
         <span class="section-tag">Experiences</span>
         <h2 class="section-title">활동 경험</h2>
-        <p class="section-desc">봉사·국제교류·동아리 활동을 통해 성장해 왔습니다.</p>
+        <p class="section-desc">봉사와 교류 활동을 통해 쌓아온 경험</p>
       </div>
 
       <div class="relative mt-12">
         <div class="timeline-line hidden md:block"></div>
-        <div class="space-y-6" id="timeline-container">
-          <!-- Timeline items injected by JS -->
+        <div class="space-y-8">
+          <div class="timeline-item fade-in-up">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-date">2026.05</span>
+              <h3 class="font-semibold text-slate-800">청소년자원봉사페스티벌 부스 스태프 활동</h3>
+              <p class="text-primary-600 text-sm font-medium mt-1">RCY 동아리</p>
+            </div>
+          </div>
+          <div class="timeline-item fade-in-up">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-date">2026.03</span>
+              <h3 class="font-semibold text-slate-800">OPEN 문화교류부 서울 청소년 내·외국인 및 국제교류 프로그램 기획 및 참여</h3>
+              <p class="text-primary-600 text-sm font-medium mt-1">유스굿윌가이드 (YGG)</p>
+            </div>
+          </div>
+          <div class="timeline-item fade-in-up">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-date">2026.03</span>
+              <h3 class="font-semibold text-slate-800">유스굿윌가이드 서울 투어 통역 가이드 봉사</h3>
+              <p class="text-primary-600 text-sm font-medium mt-1">메인 가이드 활동</p>
+            </div>
+          </div>
+          <div class="timeline-item fade-in-up">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-date">2025.11</span>
+              <h3 class="font-semibold text-slate-800">제빵 봉사활동</h3>
+              <p class="text-primary-600 text-sm font-medium mt-1">RCY 동아리</p>
+            </div>
+          </div>
+          <div class="timeline-item fade-in-up">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-date">2025.11</span>
+              <h3 class="font-semibold text-slate-800">서울남산공원 플로깅 활동 및 중도입국청소년 체육교육 봉사활동</h3>
+              <p class="text-primary-600 text-sm font-medium mt-1">RCY 동아리</p>
+            </div>
+          </div>
+          <div class="timeline-item fade-in-up">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-date">2025.11</span>
+              <h3 class="font-semibold text-slate-800">체험봉사활동</h3>
+              <p class="text-primary-600 text-sm font-medium mt-1">RCY 동아리</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Academic Activities -->
-  <section id="academic" class="section-padding bg-white">
+  <section id="academic" class="py-20 bg-slate-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="section-header reveal">
-        <span class="section-tag">Academic</span>
-        <h2 class="section-title">교과활동</h2>
+      <div class="section-header fade-in-up">
+        <span class="section-tag">교과활동</span>
+        <h2 class="section-title">학업 성과</h2>
+        <p class="section-desc">이수 학점 및 GPA 현황</p>
       </div>
 
-      <!-- Summary Charts -->
-      <div class="grid md:grid-cols-2 gap-8 mt-12">
-        <div class="reveal card bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
-          <h3 class="font-semibold text-skku-navy mb-4 flex items-center gap-2">
-            <span class="w-1 h-5 bg-skku-blue rounded-full"></span>
-            이수학점
-          </h3>
-          <div class="chart-container">
-            <canvas id="credits-chart"></canvas>
+      <div class="grid md:grid-cols-2 gap-6 mt-12">
+        <!-- Credits -->
+        <div class="card fade-in-up">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="icon-box bg-blue-100 text-blue-600">📚</div>
+            <h3 class="text-lg font-semibold">이수학점 | Credits Earned</h3>
+          </div>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center py-2 border-b border-slate-100">
+              <span class="text-slate-600">교양</span>
+              <span class="font-bold text-primary-600">18학점</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-slate-100">
+              <span class="text-slate-600">선택</span>
+              <span class="font-bold text-primary-600">1학점</span>
+            </div>
+            <div class="flex justify-between items-center py-3 bg-primary-50 rounded-lg px-4">
+              <span class="font-semibold text-slate-800">총 이수학점</span>
+              <span class="font-bold text-xl text-primary-600">19학점</span>
+            </div>
           </div>
         </div>
-        <div class="reveal delay-100 card bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
-          <h3 class="font-semibold text-skku-navy mb-4 flex items-center gap-2">
-            <span class="w-1 h-5 bg-skku-gold rounded-full"></span>
-            평점 평균
-          </h3>
-          <div class="chart-container">
-            <canvas id="gpa-chart"></canvas>
+
+        <!-- GPA -->
+        <div class="card fade-in-up">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="icon-box bg-emerald-100 text-emerald-600">📈</div>
+            <h3 class="text-lg font-semibold">평점 평균 | GPA</h3>
+          </div>
+          <div class="flex items-center justify-center py-6">
+            <div class="gpa-circle">
+              <svg viewBox="0 0 120 120" class="w-40 h-40">
+                <circle cx="60" cy="60" r="54" fill="none" stroke="#e2e8f0" stroke-width="8"/>
+                <circle cx="60" cy="60" r="54" fill="none" stroke="#4f46e5" stroke-width="8" stroke-linecap="round"
+                  stroke-dasharray="339.292" stroke-dashoffset="67.86" transform="rotate(-90 60 60)" class="gpa-ring"/>
+              </svg>
+              <div class="gpa-text">
+                <span class="text-3xl font-bold text-primary-600">4.17</span>
+                <span class="text-sm text-slate-500">/ 4.5</span>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <p class="text-slate-600">교양 평점 · 전체 GPA</p>
           </div>
         </div>
       </div>
 
       <!-- Course History -->
-      <div class="mt-12 reveal">
-        <h3 class="text-lg font-bold text-skku-navy mb-6">교과목 수강 내역</h3>
-        <div class="grid sm:grid-cols-2 gap-4 mb-10">
-          <div class="semester-card">
-            <span class="text-skku-blue font-semibold">1학년 1학기</span>
-            <p class="text-slate-500 text-sm mt-1">2025년 9월 ~ 2025년 12월</p>
+      <div class="card mt-6 fade-in-up">
+        <h3 class="text-lg font-semibold mb-4">교과목 수강 내역</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="semester-box">
+            <h4 class="font-semibold text-primary-600">1학년 1학기</h4>
+            <p class="text-sm text-slate-500 mt-1">2025년 9월 ~ 2025년 12월</p>
           </div>
-          <div class="semester-card">
-            <span class="text-skku-blue font-semibold">1학년 2학기</span>
-            <p class="text-slate-500 text-sm mt-1">2026년 3월 ~ 2026년 6월</p>
+          <div class="semester-box">
+            <h4 class="font-semibold text-primary-600">1학년 2학기</h4>
+            <p class="text-sm text-slate-500 mt-1">2026년 3월 ~ 2026년 6월</p>
           </div>
         </div>
+      </div>
 
-        <!-- Credits Table -->
-        <div class="overflow-x-auto rounded-2xl border border-slate-100 shadow-sm">
-          <table class="w-full text-sm" id="credits-table">
-            <thead>
-              <tr class="bg-skku-navy text-white">
-                <th class="px-5 py-4 text-left font-medium rounded-tl-2xl">과목</th>
-                <th class="px-5 py-4 text-center font-medium">학점</th>
-                <th class="px-5 py-4 text-center font-medium">취득학점</th>
-                <th class="px-5 py-4 text-center font-medium rounded-tr-2xl">완료</th>
-              </tr>
-            </thead>
-            <tbody id="credits-tbody">
-              <!-- Injected by JS -->
-            </tbody>
-          </table>
-        </div>
+      <!-- Credit Requirements Table -->
+      <div class="card mt-6 fade-in-up overflow-x-auto">
+        <h3 class="text-lg font-semibold mb-4">🎓 학점 취득 현황</h3>
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b-2 border-slate-200">
+              <th class="text-left py-3 px-2 font-semibold text-slate-600">구분</th>
+              <th class="text-left py-3 px-2 font-semibold text-slate-600">영역</th>
+              <th class="text-right py-3 px-2 font-semibold text-slate-600">취득</th>
+              <th class="text-right py-3 px-2 font-semibold text-slate-600">기준</th>
+              <th class="text-right py-3 px-2 font-semibold text-slate-600">잔여</th>
+            </tr>
+          </thead>
+          <tbody id="credit-table">
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
 
-  <!-- Extracurricular -->
-  <section id="extracurricular" class="section-padding bg-slate-50">
+  <!-- Extracurricular Activities -->
+  <section id="extracurricular" class="py-20 bg-white">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="section-header reveal">
-        <span class="section-tag">Extracurricular</span>
-        <h2 class="section-title">비교과활동</h2>
+      <div class="section-header fade-in-up">
+        <span class="section-tag">비교과활동</span>
+        <h2 class="section-title">비교과 프로그램</h2>
+        <p class="section-desc">졸업 요건 충족 현황 및 프로그램 참여</p>
       </div>
 
       <div class="grid lg:grid-cols-2 gap-8 mt-12">
-        <div class="reveal card bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
-          <h3 class="font-semibold text-skku-navy mb-4">비교과 프로그램 참여 현황</h3>
-          <div class="chart-container chart-container-lg">
-            <canvas id="radar-chart"></canvas>
+        <!-- Radar Chart -->
+        <div class="card fade-in-up">
+          <h3 class="text-lg font-semibold mb-2">비교과 프로그램 이수 내역</h3>
+          <p class="text-sm text-slate-500 mb-4">레이더 차트로 시각화</p>
+          <div class="relative h-80 flex items-center justify-center">
+            <canvas id="radarChart"></canvas>
+          </div>
+          <div class="grid grid-cols-2 gap-3 mt-4" id="program-stats">
           </div>
         </div>
 
-        <div class="reveal delay-100 space-y-4">
-          <div class="graduation-card">
-            <h4 class="font-semibold text-skku-navy mb-3 flex items-center gap-2">
-              <span class="text-lg">🏅</span> 인증활동
-            </h4>
-            <div class="grid grid-cols-3 gap-3">
-              <div class="metric-box">
-                <p class="text-xs text-slate-500">교내봉사</p>
-                <p class="text-lg font-bold text-skku-blue" id="vol-on">—</p>
+        <!-- Graduation Requirements -->
+        <div class="space-y-6 fade-in-up">
+          <div class="card">
+            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">❤️ 인성품</h3>
+            <div class="space-y-3">
+              <div class="progress-item">
+                <div class="flex justify-between text-sm mb-1"><span>교내봉사</span><span class="font-semibold">31시간</span></div>
               </div>
-              <div class="metric-box">
-                <p class="text-xs text-slate-500">교외봉사</p>
-                <p class="text-lg font-bold text-skku-blue" id="vol-off">—</p>
+              <div class="progress-item">
+                <div class="flex justify-between text-sm mb-1"><span>교외봉사</span><span class="font-semibold">22시간</span></div>
               </div>
-              <div class="metric-box">
-                <p class="text-xs text-slate-500">총 봉사시간</p>
-                <p class="text-lg font-bold text-skku-gold" id="vol-total">—</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="graduation-card">
-            <h4 class="font-semibold text-skku-navy mb-3 flex items-center gap-2">
-              <span class="text-lg">🌍</span> 국제화
-            </h4>
-            <div class="grid grid-cols-3 gap-3">
-              <div class="metric-box">
-                <p class="text-xs text-slate-500">국제어학</p>
-                <p class="text-sm font-semibold text-skku-blue">진행 중</p>
-              </div>
-              <div class="metric-box">
-                <p class="text-xs text-slate-500">글로벌 체험</p>
-                <p class="text-sm font-semibold text-skku-blue">YGG 투어</p>
-              </div>
-              <div class="metric-box">
-                <p class="text-xs text-slate-500">TOEIC</p>
-                <p class="text-sm font-semibold text-skku-blue">준비 중</p>
+              <div class="progress-bar-wrap">
+                <div class="flex justify-between text-sm mb-1">
+                  <span class="font-semibold">총 봉사시간</span>
+                  <span class="text-emerald-600 font-bold">53 / 40시간 ✅</span>
+                </div>
+                <div class="progress-track"><div class="progress-fill bg-emerald-500" style="width: 100%"></div></div>
               </div>
             </div>
           </div>
 
-          <div class="graduation-card">
-            <h4 class="font-semibold text-skku-navy mb-3 flex items-center gap-2">
-              <span class="text-lg">📚</span> 학업 &amp; AI 활동
-            </h4>
-            <div class="flex flex-wrap gap-2">
-              <span class="tag">비교과 프로그램</span>
-              <span class="tag">AI 교과 교육</span>
-              <span class="tag">AI 팀활동</span>
-              <span class="tag">AI 비교과 교육</span>
+          <div class="card">
+            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">🌍 국제품</h3>
+            <div class="space-y-4">
+              <div class="progress-bar-wrap">
+                <div class="flex justify-between text-sm mb-1"><span>국제어 수업</span><span>10 / 21학점</span></div>
+                <div class="progress-track"><div class="progress-fill bg-blue-500" data-width="48"></div></div>
+              </div>
+              <div class="progress-bar-wrap">
+                <div class="flex justify-between text-sm mb-1"><span>글로벌 체험</span><span>0 / 60시간</span></div>
+                <div class="progress-track"><div class="progress-fill bg-blue-500" data-width="0"></div></div>
+              </div>
+              <p class="text-sm text-slate-500">TOEIC 성적: <span class="text-slate-700 font-medium">미응시</span></p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">💡 창의품</h3>
+            <div class="progress-bar-wrap">
+              <div class="flex justify-between text-sm mb-1"><span>비교과 프로그램</span><span>43 / 90시간</span></div>
+              <div class="progress-track"><div class="progress-fill bg-amber-500" data-width="48"></div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">🤖 AI품</h3>
+            <div class="space-y-4">
+              <div class="progress-bar-wrap">
+                <div class="flex justify-between text-sm mb-1"><span>AI 교과 교육</span><span>3 / 9학점</span></div>
+                <div class="progress-track"><div class="progress-fill bg-purple-500" data-width="33"></div></div>
+              </div>
+              <div class="progress-bar-wrap">
+                <div class="flex justify-between text-sm mb-1"><span>AI 캡스톤</span><span>0 / 3학점</span></div>
+                <div class="progress-track"><div class="progress-fill bg-purple-500" data-width="0"></div></div>
+              </div>
+              <div class="progress-bar-wrap">
+                <div class="flex justify-between text-sm mb-1"><span>AI 비교과 교육</span><span>20 / 90시간</span></div>
+                <div class="progress-track"><div class="progress-fill bg-purple-500" data-width="22"></div></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Activity Details -->
-      <div class="mt-16 reveal">
-        <h3 class="text-lg font-bold text-skku-navy mb-6">세부 활동 내역</h3>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="activity-details">
-          <!-- Injected by JS -->
+      <div class="mt-12 fade-in-up">
+        <h3 class="text-xl font-semibold mb-6">세부 활동 내역</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="activity-details">
         </div>
       </div>
     </div>
   </section>
 
   <!-- Skills -->
-  <section id="skills" class="section-padding bg-white">
+  <section id="skills" class="py-20 bg-slate-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="section-header reveal">
+      <div class="section-header fade-in-up">
         <span class="section-tag">Skills</span>
-        <h2 class="section-title">기술 &amp; 역량</h2>
-        <p class="section-desc">AI 도구와 협업 툴을 적극 활용하여 학습과 프로젝트를 수행합니다.</p>
+        <h2 class="section-title">기술 역량</h2>
+        <p class="section-desc">학업과 프로젝트에 활용하는 도구들</p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6 mt-12" id="skills-container">
-        <!-- Injected by JS -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12" id="skills-grid">
       </div>
     </div>
   </section>
 
-  <!-- Future Plans -->
-  <section id="plans" class="section-padding bg-gradient-to-br from-skku-navy to-skku-blue text-white">
+  <!-- Goals -->
+  <section id="goals" class="py-20 bg-white">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="section-header reveal">
-        <span class="section-tag-light">Future Plans</span>
-        <h2 class="text-3xl sm:text-4xl font-display font-bold">목표와 계획</h2>
+      <div class="section-header fade-in-up">
+        <span class="section-tag">Future Plans</span>
+        <h2 class="section-title">목표와 계획</h2>
+        <p class="section-desc">앞으로의 성장 방향</p>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12" id="plans-container">
-        <!-- Injected by JS -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12" id="goals-grid">
       </div>
     </div>
   </section>
 
   <!-- Values -->
-  <section id="values" class="section-padding bg-slate-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="section-header reveal text-center">
-        <span class="section-tag mx-auto">Values</span>
-        <h2 class="section-title">가치관</h2>
-        <blockquote class="mt-6 text-xl sm:text-2xl font-medium text-skku-navy leading-relaxed max-w-3xl mx-auto">
+  <section id="values" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+    <div class="absolute inset-0 hero-pattern opacity-10"></div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="section-header fade-in-up text-center">
+        <span class="section-tag text-primary-300">Values</span>
+        <h2 class="section-title text-white">가치관</h2>
+        <blockquote class="text-xl sm:text-2xl font-light text-primary-200 mt-6 max-w-3xl mx-auto leading-relaxed">
           "작은 성장이 쌓여 큰 변화를 만든다고 믿습니다."
         </blockquote>
-        <p class="mt-4 text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          대학생인 지금은 아직 많은 것을 배우는 과정에 있습니다. 새로운 지식을 빠르게 받아들이고,
-          부족한 부분은 꾸준히 채워가며 어제보다 더 나은 사람이 되는 것을 가장 중요하게 생각합니다.
+        <p class="text-slate-400 mt-4 max-w-2xl mx-auto">
+          대학생인 지금은 아직 많은 것을 배우는 과정에 있습니다. 새로운 지식을 빠르게 받아들이고, 부족한 부분은 꾸준히 채워가며 어제보다 더 나은 사람이 되는 것을 가장 중요하게 생각합니다.
         </p>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14" id="values-container">
-        <!-- Injected by JS -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12" id="values-grid">
       </div>
 
-      <div class="mt-14 text-center reveal">
-        <p class="text-sm text-slate-400 mb-3">내가 중요하게 생각하는 가치</p>
+      <div class="mt-12 text-center fade-in-up">
+        <p class="text-sm text-slate-500 mb-3">내가 중요하게 생각하는 가치</p>
         <div class="flex flex-wrap justify-center gap-3">
-          <span class="value-pill">성장</span>
-          <span class="value-pill">꾸준함</span>
-          <span class="value-pill">책임감</span>
-          <span class="value-pill">협력</span>
-          <span class="value-pill">도전</span>
+          <span class="value-tag">성장</span>
+          <span class="value-tag">꾸준함</span>
+          <span class="value-tag">책임감</span>
+          <span class="value-tag">협력</span>
+          <span class="value-tag">도전</span>
         </div>
-        <p class="mt-8 text-skku-blue font-medium italic text-lg">
+        <p class="text-primary-300 mt-8 text-lg italic">
           "오늘의 작은 성장이 내일의 큰 가능성을 만든다."
         </p>
       </div>
@@ -450,25 +443,13 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-skku-navy text-blue-200 py-10">
+  <footer class="bg-slate-950 text-slate-500 py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-      <p class="font-display text-white text-lg font-semibold mb-2">장경진 · Kyeongjin Jang</p>
-      <p class="text-sm mb-4">성균관대학교 공과대학</p>
-      <a href="mailto:jjkj300@g.skku.edu" class="text-skku-gold hover:text-amber-300 transition-colors text-sm">
-        jjkj300@g.skku.edu
-      </a>
-      <p class="text-xs text-blue-300/50 mt-6">&copy; 2026 Kyeongjin Jang. All rights reserved.</p>
+      <p class="text-sm">&copy; 2026 장경진 (Kyeongjin Jang). All rights reserved.</p>
+      <a href="mailto:jjkj300@g.skku.edu" class="text-primary-400 hover:text-primary-300 text-sm mt-2 inline-block">jjkj300@g.skku.edu</a>
     </div>
   </footer>
 
-  <!-- Back to Top -->
-  <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-skku-blue text-white shadow-lg flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-skku-navy z-50" aria-label="맨 위로">
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
-    </svg>
-  </button>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
